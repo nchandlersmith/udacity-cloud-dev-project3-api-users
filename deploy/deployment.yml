@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backenduser
+  labels:
+    app: backend_user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend_user
+  template:
+    metadata:
+      labels:
+        app: backend_user
+    spec:
+      containers:
+        - name: udagram-api-user
+          image: nchandlersmith/udagram-api-user

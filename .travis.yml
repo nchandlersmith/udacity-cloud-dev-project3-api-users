@@ -7,6 +7,5 @@ script:
   - docker --version
   - docker build -t udagram-api-user .
   - docker tag udagram-api-user nchandlersmith/udagram-api-user
-after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push nchandlersmith/udagram-api-user

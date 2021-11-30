@@ -17,3 +17,7 @@ spec:
       containers:
         - name: udagram-api-user
           image: nchandlersmith/udagram-api-user
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: udagram-api

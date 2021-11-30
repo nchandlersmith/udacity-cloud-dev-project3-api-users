@@ -8,7 +8,7 @@ script:
   # Define variables for image name building
   - export DOCKER_REPO=nchandlersmith
   - export IMAGE_NAME=udagram-api-user
-  - export TIMESTAMP=date +%Y-%m-%d-%H-%M-%S
+  - export TIMESTAMP=date +'%Y-%m-%d-%H-%M-%S'
   - export VERSION=`${TIMESTAMP}-${TRAVIS_COMIT}`
 
   # Build latest image name

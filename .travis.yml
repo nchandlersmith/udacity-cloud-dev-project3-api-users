@@ -10,16 +10,16 @@ script:
   - echo $DOCKER_REPO
   - export IMAGE_NAME=udagram-api-user
   - echo $IMAGE_NAME
-  - export TIMESTAMP=date
+  - export TIMESTAMP=/bin/date
   - echo $TIMESTAMP
-  - export VERSION=`${TIMESTAMP}-${TRAVIS_COMIT}`
+  - export VERSION=`${TIMESTAMP}-${TRAVIS_COMMIT}`
   - echo $VERSION
 
   # Build latest image name
   - export LATEST_IMAGE=`$DOCKER_REPO\$IMAGE_NAME:latest`
   - echo $LATEST_IMAGE
   # Build versioned image name
-  - export VERSIONED_IMAGE=`$DOCKER_REPO\$IMAGE_NAME:VERSION`
+  - export VERSIONED_IMAGE=`$DOCKER_REPO\$IMAGE_NAME:$VERSION`
   - echo $VERSIONED_IMAGE
 
   # Build image

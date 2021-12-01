@@ -10,27 +10,27 @@ script:
   - echo $DOCKER_REPO
   - export IMAGE_NAME=udagram-api-user
   - echo $IMAGE_NAME
-  - export TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')
+  - export TIMESTAMP=$(date +'%Y%m%d-%H%M%S')
   - echo $TIMESTAMP
   - export VERSION=${TIMESTAMP}-${TRAVIS_COMMIT}
   - echo $VERSION
 
   # Build latest image name
-  - export LATEST_IMAGE={$DOCKER_REPO}\{$IMAGE_NAME}:latest
+  - export LATEST_IMAGE="${DOCKER_REPO}\${IMAGE_NAME}:latest"
   - echo $LATEST_IMAGE
   # Build versioned image name
-  - export VERSIONED_IMAGE=$DOCKER_REPO\$IMAGE_NAME:$VERSION
+  - export VERSIONED_IMAGE="${DOCKER_REPO}\${IMAGE_NAME}:${VERSION}"
   - echo $VERSIONED_IMAGE
 
   # Build image
-  - docker build -t "$IMAGE_NAME"
+  - docker build -t $IMAGE_NAME
   # Tag latest
-  - docker tag "$IMAGE_NAME" "$LATEST_IMAGE"
+  - docker tag $IMAGE_NAME $LATEST_IMAGE
   # Tag version
-  - docker tag "$IMAGE_NAME" "$VERSIONED_IMAGE"
+  - docker tag $IMAGE_NAME $VERSIONED_IMAGE
 
   # Login to Docker Hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # Push all the things
-  - docker push "$LATEST_IMAGE"
-  - docker push "$VERSIONED_IMAGE"
+  - docker push $LATEST_IMAGE
+  - docker push $VERSIONED_IMAGE

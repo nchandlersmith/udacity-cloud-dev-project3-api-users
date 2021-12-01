@@ -16,10 +16,10 @@ script:
   - echo $VERSION
 
   # Build latest image name
-  - export LATEST_IMAGE="${DOCKER_REPO}\\${IMAGE_NAME}:latest"
+  - export LATEST_IMAGE="${DOCKER_REPO}/${IMAGE_NAME}:latest"
   - echo $LATEST_IMAGE
   # Build versioned image name
-  - export VERSIONED_IMAGE="${DOCKER_REPO}\\${IMAGE_NAME}:${VERSION}"
+  - export VERSIONED_IMAGE="${DOCKER_REPO}/${IMAGE_NAME}:${VERSION}"
   - echo $VERSIONED_IMAGE
 
   # Build image

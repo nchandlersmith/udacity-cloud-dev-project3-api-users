@@ -23,7 +23,7 @@ script:
   - echo $VERSIONED_IMAGE
 
   # Build image
-  - docker build -t $IMAGE_NAME
+  - docker build -t $IMAGE_NAME .
   # Tag latest
   - docker tag $IMAGE_NAME $LATEST_IMAGE
   # Tag version

@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: backenduser
   labels:
-    app: backend_user
+    app: udagram
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend_user
+      app: udagram
   template:
     metadata:
       labels:
-        app: backend_user
+        app: udagram
     spec:
       containers:
         - name: userapi

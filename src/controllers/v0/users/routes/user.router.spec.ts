@@ -12,12 +12,23 @@ describe('users router', () => {
   const buildUrl = (endpoint: string) => `${host}${usersRoute}${endpoint}`
 
   describe(' get /:id', () => {
-    // TODO: should handle out of range errors
-    // TODO: return valid JSON
-    // TODO: should not return null item, ugh
-    it('should do something', async () => {
-      // TODO: should probably use test account injected in setup
-      const result = await axios.get(buildUrl('/hello@gmail.com'))
+    it('should return 400 when id param is missing', async () => {
+      const result = await axios.get(buildUrl('/'))
+        .catch(error => error)
+      expect(result.response.status).toEqual(400)
+      expect(result.response.data).toEqual({message: 'User id param required and not found.'})
+    })
+
+    it('should return not found when email not found', async () => {
+      const result = await axios.get(buildUrl('/ghostrider@gmail.com'))
+        .catch(error => error)
+
+      expect(result.response.status).toEqual(404)
+      expect(result.response.data).toEqual({message: 'User not found.'})
+    })
+
+    it('should return user if found', async () => {
+      const result = await axios.get(buildUrl(`/${testConfig.username}`))
       expect(result.status).toEqual(200)
       expect(result.data.createdAt).toBeNotEmptyString()
       expect(result.data.email).toEqual('hello@gmail.com')

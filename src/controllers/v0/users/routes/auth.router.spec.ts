@@ -12,7 +12,7 @@ expect.extend({
 describe('auth router', () => {
   const host = `${testConfig.host}:${testConfig.port}`
   const authRoute = '/api/v0/users/auth'
-  const buildUrl = (endpoint: string) => `${host}${authRoute}${endpoint}`
+  const buildUrl = (endpoint: string): string => `${host}${authRoute}${endpoint}`
   let sequelize: Sequelize
 
   beforeAll(() => {
@@ -81,6 +81,9 @@ describe('auth router', () => {
       expect(result.status).toEqual(200)
       expect(result.data.message).toEqual('Authenticated.')
       expect(result.data.auth).toBeTruthy()
+      expect(result.headers['access-control-allow-origin']).toEqual('*')
+      expect(result.headers['connection']).toEqual('close')
+      expect(result.headers['content-type']).toEqual('application/json; charset=utf-8')
     })
   })
 
@@ -135,10 +138,13 @@ describe('auth router', () => {
       expect(result.data.auth).toBeTruthy()
       expect(result.data.token).toBeNotEmptyString()
       expect(result.data.user.email).toBeNotEmptyString()
+      expect(result.headers['access-control-allow-origin']).toEqual('*')
+      expect(result.headers['connection']).toEqual('close')
+      expect(result.headers['content-type']).toEqual('application/json; charset=utf-8')
     })
   })
 
-  describe('post /', () => {
+  describe('add new user: post /', () => {
     const addUserEndpoint = '/'
     const email = 'test@example.com'
     const password = 'my1P455w0rd15Gr347'
@@ -181,6 +187,9 @@ describe('auth router', () => {
       expect(result.status).toEqual(201)
       expect(result.data.token).toBeNotEmptyString()
       expect(result.data.user.email).toEqual(email)
+      expect(result.headers['access-control-allow-origin']).toEqual('*')
+      expect(result.headers['connection']).toEqual('close')
+      expect(result.headers['content-type']).toEqual('application/json; charset=utf-8')
     })
   })
 })

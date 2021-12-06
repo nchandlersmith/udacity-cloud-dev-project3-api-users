@@ -9,7 +9,7 @@ expect.extend({
 describe('users router', () => {
   const host = `${testConfig.host}:${testConfig.port}`
   const usersRoute = '/api/v0/users'
-  const buildUrl = (endpoint: string) => `${host}${usersRoute}${endpoint}`
+  const buildUrl = (endpoint: string): string => `${host}${usersRoute}${endpoint}`
 
   describe(' get /:id', () => {
     it('should return 400 when id param is missing', async () => {
@@ -31,10 +31,13 @@ describe('users router', () => {
       const result = await axios.get(buildUrl(`/${testConfig.username}`))
       expect(result.status).toEqual(200)
       expect(result.data.createdAt).toBeNotEmptyString()
-      expect(result.data.email).toEqual('hello@gmail.com')
+      expect(result.data.email).toEqual(testConfig.username)
       expect(result.data.passwordHash).not.toBeNull()
       expect(result.data.passwordHash).not.toEqual('')
       expect(result.data.updatedAt).toBeNotEmptyString()
+      expect(result.headers['access-control-allow-origin']).toEqual('*')
+      expect(result.headers['connection']).toEqual('close')
+      expect(result.headers['content-type']).toEqual('application/json; charset=utf-8')
     })
   })
 })

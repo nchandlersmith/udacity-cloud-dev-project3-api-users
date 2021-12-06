@@ -11,7 +11,6 @@ import * as EmailValidator from 'email-validator';
 
 const router: Router = Router();
 
-
 async function generatePassword(plainTextPassword: string): Promise<string> {
   const saltRounds = 10;
   const salt = await bcrypt.genSalt(saltRounds);
@@ -79,6 +78,7 @@ router.post('/login', async (req: Request, res: Response) => {
 });
 
 
+// add user
 router.post('/', async (req: Request, res: Response) => {
   const email = req.body.email;
   const plainTextPassword = req.body.password;

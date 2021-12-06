@@ -32,7 +32,7 @@ describe('auth router', () => {
     sequelize.close()
   })
 
-  async function deleteTestUser(email: string): Promise<any> {
+  async function deleteUser(email: string): Promise<any> {
     await User.destroy({
       where: {
         email
@@ -177,10 +177,10 @@ describe('auth router', () => {
 
     it('should add new user', async () => {
       const result = await axios.post(buildUrl(addUserEndpoint), {email, password})
+      await deleteUser(email)
       expect(result.status).toEqual(201)
       expect(result.data.token).toBeNotEmptyString()
       expect(result.data.user.email).toEqual(email)
-      await deleteTestUser(email);
     })
   })
 })

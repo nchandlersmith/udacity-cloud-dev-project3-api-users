@@ -19,7 +19,7 @@ script:
   - export LATEST_IMAGE="${DOCKER_REPO}/${IMAGE_NAME}:latest"
   - echo $LATEST_IMAGE
   # Build versioned image name
-  - export VERSIONED_IMAGE="${DOCKER_REPO}/${IMAGE_NAME}:${VERSION}"
+  - export VERSIONED_IMAGE="${DOCKER_REPO}/${IMAGE_NAME}:${VERSION:0:5}"
   - echo $VERSIONED_IMAGE
 
   # Build image

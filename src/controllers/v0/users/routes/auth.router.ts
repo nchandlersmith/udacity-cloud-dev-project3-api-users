@@ -51,6 +51,10 @@ router.get('/verification',
     });
 
 router.post('/login', async (req: Request, res: Response) => {
+  if (req.body === undefined) {
+    return res.status(500).send({message: 'Request body not found. Did someone leave out a body parser?'})
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -80,6 +84,10 @@ router.post('/login', async (req: Request, res: Response) => {
 
 // add user
 router.post('/', async (req: Request, res: Response) => {
+  if (req.body === undefined) {
+    return res.status(500).send({message: 'Request body not found. Did someone leave out a body parser?'})
+  }
+
   const email = req.body.email;
   const plainTextPassword = req.body.password;
 

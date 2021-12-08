@@ -25,7 +25,7 @@ import bodyParser from "body-parser";
     ],
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
     preflightContinue: true,
-    origin: '*',
+    origin: /a8b71771ad55c4a1a8aba8f8358ba382-87591036.us-east-2.elb.amazonaws.com$/
   }));
 
   app.use('/api/v0/', IndexRouter);
